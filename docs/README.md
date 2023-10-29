@@ -45,3 +45,31 @@
 
 **Acceptance Criteria:**
 - Nutritional details such as calories, macronutrients, etc., should be displayed for each recipe.
+
+# Mis-User Stories:
+
+**Story 1**: Submit Malicious Recipe
+- As a malicious user, I want to submit a recipe with harmful or misleading content.
+
+**Mitigation Criteria**:
+
+Implement content moderation or user-reported flagging system to review recipes before they are publicly available.
+Employ filters and validation to prevent or remove harmful content from being published.
+
+**Story 2**: Steal User Data
+- As a malicious user, I want to access other users' personal data stored in the app.
+
+**Mitigation Criteria**:
+
+Apply robust user authentication and authorization mechanisms.
+Encrypt sensitive data and follow security best practices to prevent unauthorized access to user information.
+Regularly perform security audits and updates to patch vulnerabilities.
+
+**Story 3**: Manipulate Recipe Recommendations
+- As a malicious user, I want to manipulate the algorithm to promote specific recipes unfairly.
+
+**Mitigation Criteria**:
+
+Implement an algorithm that detects abnormal or suspicious behavior in recipe promotions.
+Utilize machine learning models to adapt and identify anomalies in recommendations.
+Regularly audit the recommendation system for fairness and accuracy.
