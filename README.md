@@ -1,5 +1,5 @@
 # Recipe-Finder-app
-# Executive Summary
+## Executive Summary
 
 Picture this: You stand in your kitchen, staring at a handful of ingredients, wondering what delicious masterpiece you can create. That's where "Recipe Finder" steps in. It's not just an app; it's your culinary companion, ready to inspire and simplify your cooking adventures.
 
