@@ -76,3 +76,16 @@ Regularly audit the recommendation system for fairness and accuracy.
 
 # App Mockup
 ![recipe finder app mockup](https://github.com/Graceevah/Recipe-Finder-app/assets/129107955/fa1cfec3-c5aa-4def-a846-c80890bb4788)
+
+# Architecture Diagram
+## Context Diagram
+![Context diagram](https://github.com/Graceevah/Recipe-Finder-app/assets/129107955/c4dc4454-8bbe-4d0c-90eb-a873aeb1670e)
+
+## Container Diagram
+![Container diagram](https://github.com/Graceevah/Recipe-Finder-app/assets/129107955/1b6bdaf0-0428-4c81-8744-6b766b56c9ae)
+
+## Component Diagram
+![Component Diagram](https://github.com/Graceevah/Recipe-Finder-app/assets/129107955/3b540050-a3e3-4988-b6d3-69ca0bfe2deb)
+
+
+
