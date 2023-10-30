@@ -75,4 +75,4 @@ Utilize machine learning models to adapt and identify anomalies in recommendatio
 Regularly audit the recommendation system for fairness and accuracy.
 
 # App Mockup
-![App mockup diagram](https://unomail-my.sharepoint.com/:i:/g/personal/gevahnzoughe_unomaha_edu/EdKvCqULhS9Gg7YEFEZfeNEBmuV0PLVFYAsTINPhL9caWQ?e=Z34uHG)
+![recipe finder app mockup](https://github.com/Graceevah/Recipe-Finder-app/assets/129107955/fa1cfec3-c5aa-4def-a846-c80890bb4788)
