@@ -73,3 +73,6 @@ Regularly perform security audits and updates to patch vulnerabilities.
 Implement an algorithm that detects abnormal or suspicious behavior in recipe promotions.
 Utilize machine learning models to adapt and identify anomalies in recommendations.
 Regularly audit the recommendation system for fairness and accuracy.
+
+# App Mockup
+![App mockup diagram]((https://unomail-my.sharepoint.com/:i:/g/personal/gevahnzoughe_unomaha_edu/EdKvCqULhS9Gg7YEFEZfeNEBmuV0PLVFYAsTINPhL9caWQ?e=Z34uHG)https://unomail-my.sharepoint.com/:i:/g/personal/gevahnzoughe_unomaha_edu/EdKvCqULhS9Gg7YEFEZfeNEBmuV0PLVFYAsTINPhL9caWQ?e=Z34uHG)
