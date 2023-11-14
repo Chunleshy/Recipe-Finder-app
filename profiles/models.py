@@ -22,6 +22,15 @@ class Profile(models.Model):
 #Model to represent ingredients
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
-
+    
     def __str__(self):
         return self.name
+    
+#model to represent recipes
+class Recipe(models.Model):
+    title = models.CharField(max_length=255)
+    ingredients = models.ManyToManyField(Ingredient)
+    # Add other fields as needed (instructions, image,...)
+
+    def __str__(self):
+        return self.title

@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import IngredientForm
-from .models import Ingredient
+from .models import Ingredient, Recipe
 import requests
 
 
@@ -47,3 +47,9 @@ def search_recipes(request):
     recipes = response.json().get('hits', [])
 
     return render(request, 'recipe_search.html', {'recipes': recipes})
+
+
+def recipe_details(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    return render(request, 'recipe_details.html', {'recipe': recipe})
+
