@@ -5,6 +5,13 @@ from django.conf import settings
 
 # Create your models here.
 
+DIFFICULTY_CHOICES = [
+    ('easy', 'Easy'),
+    ('medium', 'Medium'),
+    ('difficult', 'Difficult'),
+]
+
+
 class CustomUser(AbstractUser):    
     bio = models.TextField(max_length=500, blank=True)
 
@@ -22,6 +29,8 @@ class Profile(models.Model):
 #Model to represent ingredients
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
+    category = models.CharField(max_length=50, blank=True)
+
     
     def __str__(self):
         return self.name
@@ -30,7 +39,11 @@ class Ingredient(models.Model):
 class Recipe(models.Model):
     title = models.CharField(max_length=255)
     ingredients = models.ManyToManyField(Ingredient)
-    # Add other fields as needed (instructions, image,...)
-
+    instructions = models.TextField(default='Add recipe instruction here.') #text field to store step by step instructions for preparing the recipe 
+    cooking_time = models.DurationField(null=True, blank=True)
+    preparation_time = models.DurationField(null=True, blank=True)
+    servings = models.PositiveIntegerField(default=0)
+    difficulty = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES, default='easy')
+   
     def __str__(self):
         return self.title
