@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'profiles/styles.css' %}">
+    <script src="{% static 'profiles/js/main.js' %}" defer></script>
+
+    <title>Recipe Finder</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Recipe Finder</h1>
+    </header>
+    
+    <div class="search-bar-container">
+        <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search for recipes...">
+            <button type="button" id="search-button">Search</button>
+        </form>
+    </div>
+    <div id="search-results-container"></div>
+    
+  
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get references to form and results container
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const searchResultsContainer = document.getElementById('search-results-container');
+
+            // Function to make an AJAX request to the backend and update the results container
+            const searchRecipes = () => {
+                const query = searchInput.value.trim();
+
+                // Check if the query is not empty
+                if (query !== '') {
+                    // Make an AJAX request to the backend
+                    fetch(`/api/search_recipes/?q=${encodeURIComponent(query)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Update the results container with the received data
+                            searchResultsContainer.innerHTML = '';
+
+                            if (data.length > 0) {
+                                data.forEach(recipe => {
+                                    const recipeCard = document.createElement('div');
+                                    recipeCard.innerHTML = `
+                                    <h2>${recipe.title}</h2>
+                                    ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.title}">` : ''}
+                                    <p>${recipe.description}</p>
+                                    <a href="/recipe/${recipe.id}/" class="view-details-button">View Details</a>
+                                `;
+                                    searchResultsContainer.appendChild(recipeCard);
+                                });
+                            } else {
+                                // Display a message when no results are found
+                                searchResultsContainer.innerHTML = '<p>No recipes found.</p>';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching search results:', error);
+                            // Handle error, e.g., display an error message
+                        });
+                } else {
+                    // Display a message when the query is empty
+                    searchResultsContainer.innerHTML = '<p>Please enter a search query.</p>';
+                }
+            };
+
+            // Attach the searchRecipes function to the search button click event
+            searchButton.addEventListener('click', searchRecipes);
+
+            // Optionally, you can also listen for the Enter key press in the input field
+            searchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    searchRecipes();
+                }
+            });
+        });
+    </script>
+    
+</body>
+
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'your_app/styles.css' %}">
+    <title>{{ recipe.title }} - Recipe Details</title>
+</head>
+<body>
+    <div class="recipe-detail-container">
+        <h1>{{ recipe.title }}</h1>
+
+        {% if recipe.image %}
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+        {% endif %}
+
+        <h2>Ingredients:</h2>
+        <ul>
+            {% for ingredient in recipe.ingredients %}
+                <li>{{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Instructions:</h2>
+        <p>{{ recipe.instructions }}</p>
+
+        <a href="{% url 'search_results' %}" class="back-to-search-button">Back to Search</a>
+    </div>
+</body>
+</html>
