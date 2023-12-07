@@ -75,6 +75,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'recipe_finder_project.urls'
 CORS_ALLOW_ALL_ORIGINS = True
+SESSION_ENGINE= 'django.contrib.sessions.backends.db'
+LOGIN_URL = 'login'
 
 TEMPLATES = [
     {

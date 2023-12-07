@@ -1,17 +1,45 @@
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from .models import Recipe
 from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            # Handle authentication failure
+            pass
+
+    return render(request, 'login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+
+@login_required
+def protected_view(request):
+    # This view can only be accessed by authenticated users
+    return render(request, 'protected.html')
+
+@login_required
 def my_view(request):
     return render(request, 'index.html')
 
-
+@login_required
 @require_GET
 def search_recipes(request):
     query = request.GET.get('q', '')
@@ -31,16 +59,16 @@ def search_recipes(request):
         # Handle API request error
         return JsonResponse({'error': 'Failed to fetch recipes from Edamam API'}, status=500)
 
-
+@login_required
 def get_recipe_details(request):
     recipe_id = request.GET.get('id')
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
-    # Adjust the following based on your model structure
+    
     recipe_details = {
         'title': recipe.title,
         'image': recipe.image.url if recipe.image else '',
-        'ingredients': recipe.ingredients.split('\n'),  # Adjust as needed
+        'ingredients': recipe.ingredients.split('\n'),  
         'instructions': recipe.instructions,
     }
 
