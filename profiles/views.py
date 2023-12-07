@@ -12,57 +12,6 @@ def my_view(request):
     return render(request, 'index.html')
 
 
-def get_edamam_recipes(query):
-    # Replace 'your_app_id' and 'your_app_key' with your Edamam API credentials
-    edamam_api_url = 'https://api.edamam.com/search'
-    app_id = '50c4c823'
-    app_key = 'e09fe9a065ead84d20de770503446b05	—'
-
-    params = {
-        'q': query,
-        'app_id': app_id,
-        'app_key': app_key,
-    }
-
-    try:
-        response = requests.get(edamam_api_url, params=params)
-        response.raise_for_status()  # Raise an HTTPError for bad responses
-        data = response.json()
-        recipes = []
-
-        for hit in data.get('hits', []):
-            recipe_data = hit.get('recipe', {})
-            recipes.append({
-                'title': recipe_data.get('label', ''),
-                'ingredients': recipe_data.get('ingredientLines', []),
-                'instructions': recipe_data.get('url', ''),
-            })
-
-        return recipes
-
-    except requests.RequestException as e:
-        # Handle exceptions such as network errors or invalid responses
-        print(f"Error making request to Edamam API: {e}")
-        return {'error': 'Error connecting to the Edamam API'}
-
-    except Exception as e:
-        # Handle other unexpected exceptions
-        print(f"Unexpected error: {e}")
-        return {'error': 'An unexpected error occurred'}
-
-
-
-def search_results(request):
-    query = request.GET.get('q', '')
-    recipes = Recipe.objects.filter(title__icontains=query)
-    return render(request, 'search_results.html', {'recipes': recipes})
-
-def recipe_detail(request, recipe_id):
-    recipe = get_object_or_404(Recipe, id=recipe_id)
-    return render(request, 'recipe_detail.html', {'recipe': recipe})
-
-
-
 @require_GET
 def search_recipes(request):
     query = request.GET.get('q', '')
@@ -81,3 +30,18 @@ def search_recipes(request):
     else:
         # Handle API request error
         return JsonResponse({'error': 'Failed to fetch recipes from Edamam API'}, status=500)
+
+
+def get_recipe_details(request):
+    recipe_id = request.GET.get('id')
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+
+    # Adjust the following based on your model structure
+    recipe_details = {
+        'title': recipe.title,
+        'image': recipe.image.url if recipe.image else '',
+        'ingredients': recipe.ingredients.split('\n'),  # Adjust as needed
+        'instructions': recipe.instructions,
+    }
+
+    return JsonResponse(recipe_details)
