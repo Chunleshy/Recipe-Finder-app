@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,21 @@ import json
 import requests
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
+from .forms import SignUpForm
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('login')  # Redirect to the login page after successful registration
+    else:
+        form = SignUpForm()
+        print(form.errors)
+
+    return render(request, 'signup.html', {'form': form})
 
 
 def login_view(request):
@@ -18,7 +33,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('homepage')
         else:
             # Handle authentication failure
             pass
@@ -73,3 +88,4 @@ def get_recipe_details(request):
     }
 
     return JsonResponse(recipe_details)
+
