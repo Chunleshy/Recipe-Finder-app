@@ -9,7 +9,7 @@
 
     <title>Recipe Finder</title>
     <style>
-        /* Add some fun styles to the header */
+        
         header {
             text-align: center;
             padding: 20px;
@@ -24,9 +24,22 @@
         }
         
         body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #e0f7fa;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa;
+        }
+        .view-details-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Green color */
+            color: #fff; /* White text color */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-details-button:hover {
+            background-color: #45a049; /* Darker green color on hover */
         }
     </style>
 </head>
@@ -49,76 +62,7 @@
     </div>
     
     <div id="search-results-container"></div>
-    <div id="recipe-details-container"></div>
-  
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get references to form and results container
-            const searchForm = document.getElementById('search-form');
-            const searchInput = document.getElementById('search-input');
-            const searchButton = document.getElementById('search-button');
-            const searchResultsContainer = document.getElementById('search-results-container');
-
-            // Function to make an AJAX request to the backend and update the results container
-            const searchRecipes = () => {
-                const query = searchInput.value.trim();
-
-                // Check if the query is not empty
-                if (query !== '') {
-                    // Make an AJAX request to the backend
-                    fetch(`/api/search_recipes/?q=${encodeURIComponent(query)}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Update the results container with the received data
-                            searchResultsContainer.innerHTML = '';
-
-                            if (data.length > 0) {
-                                data.forEach(recipe => {
-                                    const recipeCard = document.createElement('div');
-                                    recipeCard.innerHTML = `
-                                    <h2>${recipe.title}</h2>
-                                    ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.title}">` : ''}
-                                    <p>${recipe.description}</p>
-                                    <a href="/recipe/${recipe.id}/" class="view-details-button">View Details</a>
-                                `;
-                                    searchResultsContainer.appendChild(recipeCard);
-                                });
-                            } else {
-                                // Display a message when no results are found
-                                searchResultsContainer.innerHTML = '<p>No recipes found.</p>';
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching search results:', error);
-                            // Handle error, e.g., display an error message
-                        });
-                } else {
-                    // Display a message when the query is empty
-                    searchResultsContainer.innerHTML = '<p>Please enter a search query.</p>';
-                }
-            };
-
-            // Attach the searchRecipes function to the search button click event
-            searchButton.addEventListener('click', searchRecipes);
-
-            // Optionally, you can also listen for the Enter key press in the input field
-            searchInput.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter') {
-                    searchRecipes();
-                }
-            });
-        });
         
-    </script>
-    
 </body>
 
 </html>
-
-
-
-
-
-
-
-
