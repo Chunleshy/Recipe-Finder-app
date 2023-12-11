@@ -23,7 +23,7 @@ STATICFILES_DIRS = [
 ]
 
 
-STATIC_ROOT = '/home/graceevah/recipe_finder_project/profiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Quick-start development settings - unsuitable for production
@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-%b$s-d-oauu$=w=tkni+uw4xq9%$rqwv&l18u-+c)v=2p6+tc*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '0.0.0.0', '*']
 
 
 
