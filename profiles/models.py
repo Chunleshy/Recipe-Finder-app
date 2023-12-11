@@ -1,31 +1,22 @@
 from django.db import models
-from django.conf import settings
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import Permission, ContentType
-
-
-
-# Create your models here.
-
+from django.contrib.auth.models import AbstractUser, Permission, ContentType, Group
 
 class MyPermissions:
     CAN_ACCESS_APP = 'can_access_app'
 
     @classmethod
     def get_permissions(cls):
-        content_type = ContentType.objects.get_for_model(CustomUser)  # Replace CustomUser with your user model
+        content_type = ContentType.objects.get_for_model(CustomUser)
         return [
             Permission.objects.get_or_create(
                 codename=cls.CAN_ACCESS_APP,
                 content_type=content_type,
             )[0]
         ]
-    
+
 class CustomUser(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
-    
-
 
 class Recipe(models.Model):
     api_id = models.CharField(max_length=255, unique=True, default='')
