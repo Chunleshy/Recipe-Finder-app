@@ -20,16 +20,8 @@ Picture this: You stand in your kitchen, staring at a handful of ingredients, wo
 Imagine the convenience of finding the perfect recipe, tailored to your available ingredients. It minimizes food waste, saves you last-minute trips to the grocery store, and sparks your creativity in the kitchen. "Recipe Finder" not only makes meal planning a breeze but also promotes sustainable cooking practices.
 
 ## Installation
-**Prerequisites**:
 
-Docker installed on your machine
+You can access the app through this link [here](https://recipe-finder-project.onrender.com).
 
-1. Clone the Repository: 
-git clone <repository_URL>
-cd recipe-finder-app
-2. Build the Docker Image
-docker build -t recipe-finder-app .
-3. Run the Docker Container:
-docker run -p 8000:8000 recipe-finder-app
 
-The Recipe Finder app should now be accessible via web browser http://localhost:8000.
+The Recipe Finder app should now be accessible via web browser.
